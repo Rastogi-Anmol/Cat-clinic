@@ -1,4 +1,6 @@
-package com.example.catclinic;
+package com.example.catclinic.views;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,20 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.catclinic.R;
+import com.example.catclinic.controllers.LogInController;
+
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
+    private LogInController logInController;
     private EditText loginUser, loginPassword;
     private Button loginButton;
     private TextView signupRedirectText;
@@ -40,12 +41,13 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        auth = FirebaseAuth.getInstance();
-
         loginUser = findViewById(R.id.login_id);
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         signupRedirectText = findViewById(R.id.signupRedirectText);
+
+        //create an instance of the login controller
+        logInController = new LogInController(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,32 +56,12 @@ public class LoginActivity extends AppCompatActivity {
                 String user = loginUser.getText().toString().trim();
                 String password = loginPassword.getText().toString().trim();
 
-                if(user.isEmpty()){
-                    loginUser.setError("User Id cannot be empty");
-                }
+                logInController.LogIn(user, password, retrievedUser -> {
+                    Toast.makeText(LoginActivity.this, "Log-in successful!", LENGTH_SHORT).show();
+                    startActivity( new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
 
-                if(password.isEmpty()){
-                    loginPassword.setError("Password cannot be empty");
-                }
-
-                if(!user.isEmpty() && !password.isEmpty()){
-                    auth.signInWithEmailAndPassword(user, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(LoginActivity.this,"login succesful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "login Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "User Id or Password is not correct!", Toast.LENGTH_SHORT).show();
-                }
+                }, e -> Toast.makeText(LoginActivity.this, e.getMessage(), LENGTH_SHORT).show());
             }
         });
 

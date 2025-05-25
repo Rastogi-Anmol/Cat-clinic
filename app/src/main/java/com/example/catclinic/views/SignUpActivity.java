@@ -1,4 +1,6 @@
-package com.example.catclinic;
+package com.example.catclinic.views;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.catclinic.R;
+import com.example.catclinic.controllers.SignUpController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
+    private SignUpController signUpController;
     private EditText signupEmail, signupPassword, signupPasswordConfirm, signupUsername;
     private Button signupButton;
     private TextView loginRedirectText;
@@ -41,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
             return insets;
         });
 
-        auth = FirebaseAuth.getInstance();
+        signUpController = new SignUpController(this);
 
         //declaring variables from the view
 
@@ -72,33 +76,13 @@ public class SignUpActivity extends AppCompatActivity {
                     username = user;
                 }
 
-                //check if necessary fields are empty
-                if(user.isEmpty()){
-                    signupEmail.setError("User id cannot be empty");
-                }
+                signUpController.signUp(user, username, password, confirm_password, retrievedUser -> {
+                    Toast.makeText(SignUpActivity.this, "Sign-up successful!", LENGTH_SHORT).show();
+                    startActivity( new Intent(SignUpActivity.this, LoginActivity.class));
+                    finish();
 
-                if(password.isEmpty()){
-                    signupPassword.setError("Password cannot be empty");
-                }
+                }, e -> Toast.makeText(SignUpActivity.this, e.getMessage(), LENGTH_SHORT).show());
 
-                //compareto returns one if true
-                if(confirm_password.compareTo(password) == 1){
-                    signupPasswordConfirm.setError("Password does not match");
-                }
-
-                auth.createUserWithEmailAndPassword(user, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(SignUpActivity.this, "Signup Succesful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                        }
-                        else{
-                            Toast.makeText(SignUpActivity.this,"Signup Failed, " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
 
             }
         });
