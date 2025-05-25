@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "249842881657",
+    "project_id": "catclinic-23748",
+    "storage_bucket": "catclinic-23748.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249842881657:android:3c32f937bfbc500ab9b0a8",
+        "android_client_info": {
+          "package_name": "com.example.catclinic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHX-uEfAOH1xzdROOzkj7UTP5l5YVXkYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
