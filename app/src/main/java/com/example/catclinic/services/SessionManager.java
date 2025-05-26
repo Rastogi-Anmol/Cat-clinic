@@ -3,6 +3,8 @@ package com.example.catclinic.services;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.firestore.auth.User;
+
 public class SessionManager {
 
     private final SharedPreferences prefrences;
@@ -13,16 +15,20 @@ public class SessionManager {
     private static final String encryptionKey = "encryptionKey";
     private static final String usernameKey = "username";
 
+
+    private static final String userIDKey = "UserID";
+
     public SessionManager(Context context){
         prefrences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
         editor = prefrences.edit();
     }
 
-    public void userLoggedIn(String username, String encryptionValue)
+    public void userLoggedIn(String UserID, String username, String encryptionValue)
     {
         editor.putString(usernameKey, username);
         editor.putString(encryptionKey, encryptionValue);
         editor.putBoolean(isLoggedInKey, true);
+        editor.putString(userIDKey, UserID);
         editor.apply();
     }
 
@@ -34,9 +40,14 @@ public class SessionManager {
         return prefrences.getString(encryptionKey, "");
     }
 
-    public String username(){
+    public String getUsername(){
         return prefrences.getString(usernameKey, "N/A");
     }
+
+    public String getUserID() {
+        return prefrences.getString(userIDKey,"");
+    }
+
 
     public void logout(){
         editor.clear();
