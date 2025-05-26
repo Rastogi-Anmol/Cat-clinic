@@ -18,7 +18,7 @@ public class SignUpController {
     }
 
 
-    public void signUp(String username, String userID, String password, String confirmPassword, OnSuccessListener<Users> onSuccess, OnFailureListener onFailure){
+    public void signUp(String userID, String username, String password, String confirmPassword, OnSuccessListener<Users> onSuccess, OnFailureListener onFailure){
 
         if(username.isEmpty()){
             onFailure.onFailure(new Exception("Username cannot be empty"));
@@ -46,7 +46,7 @@ public class SignUpController {
         }
 
 
-        auth.signUpUser(username, userID, password, confirmPassword, onSuccess, onFailure);
+        auth.signUpUser(userID, username, password, onSuccess, onFailure);
 
     }
 }

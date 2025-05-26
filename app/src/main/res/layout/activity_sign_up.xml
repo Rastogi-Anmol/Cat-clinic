@@ -83,7 +83,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
+                android:text="Sign Up"
                 android:id="@+id/signup_button"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"

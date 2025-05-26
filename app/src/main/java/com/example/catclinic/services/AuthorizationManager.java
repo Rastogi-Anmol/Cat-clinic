@@ -20,20 +20,19 @@ public class AuthorizationManager {
         sessionManager = new SessionManager(context);
     }
 
-    public void signUpUser(String username,
-                           String userid,
+    public void signUpUser(String userID,
+                           String username,
                            String password,
-                           String confirmPassword,
                            OnSuccessListener<Users> onSuccess,
                            OnFailureListener onFailure){
 
-        usersRepository.getInstance().doesUserExsist(userid, retrievedUser ->
+        usersRepository.getInstance().doesUserExsist(userID, retrievedUser ->
         {
             if(retrievedUser != null){
                 onFailure.onFailure(new Exception("User already exsists"));
             }
             else{
-                Users signupUser = new Users(userid, username, generateHashedPassword(password));
+                Users signupUser = new Users(userID, username, generateHashedPassword(password));
                 usersRepository.getInstance().addUser(signupUser, onSuccess, onFailure);
                 onSuccess.onSuccess(signupUser);
             }
@@ -52,7 +51,7 @@ public class AuthorizationManager {
                 String hashedPassword = generateHashedPassword(password);
                 if(retrievedUser.getHashedPassword().equals(hashedPassword))
                 {
-                    sessionManager.userLoggedIn(userID, generateEncryptionKey(password));
+                    sessionManager.userLoggedIn(userID, retrievedUser.getUsername(), generateEncryptionKey(password));
                     onSuccess.onSuccess(retrievedUser);
                 }
                 else{
