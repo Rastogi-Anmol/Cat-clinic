@@ -39,7 +39,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
-                android:hint="Username"
+                android:hint="UserID"
                 android:drawableStart="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black" />

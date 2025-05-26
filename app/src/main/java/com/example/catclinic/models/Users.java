@@ -3,8 +3,8 @@ package com.example.catclinic.models;
 
 public class Users {
 
+    private String UserID;
     private String username;
-    private String UserId;
     private String hashedPassword;
 
     //constructors
@@ -12,21 +12,21 @@ public class Users {
     public Users() { }
 
     public Users(String userId, String password){
-        this.UserId = userId;
+        this.UserID = userId;
         this.hashedPassword = password;
         //if no username is provided we set the username to userID
         this.username = userId;
     }
 
     public Users(String userId, String username, String password){
-        this.UserId = userId;
+        this.UserID = userId;
         this.hashedPassword = password;
         this.username = username;
     }
 
     //setters
     public void setUserId(String userId) {
-        this.UserId = userId;
+        this.UserID = userId;
     }
 
     public void setUsername(String username) {
@@ -43,7 +43,7 @@ public class Users {
     };
 
     public String getUserId(){
-        return this.UserId;
+        return this.UserID;
     }
 
     public String getHashedPassword(){
