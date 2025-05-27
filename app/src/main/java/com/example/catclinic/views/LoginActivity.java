@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 logInController.LogIn(user, password, retrievedUser -> {
                     Toast.makeText(LoginActivity.this, "Log-in successful!", LENGTH_SHORT).show();
-                    startActivity( new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity( new Intent(LoginActivity.this, JudgementDayActivity.class));
                     finish();
 
                 }, e -> Toast.makeText(LoginActivity.this, e.getMessage(), LENGTH_SHORT).show());
