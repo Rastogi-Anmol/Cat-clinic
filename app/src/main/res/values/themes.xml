@@ -18,18 +18,5 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
-
-    <!-- CatClinicButton style for all four homepage buttons -->
-    <style name="CatClinicButton" parent="Widget.MaterialComponents.Button">
-        <!-- nice rounded corners -->
-        <item name="cornerRadius">24dp</item>
-        <!-- keep text human-readable -->
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/nearBlack</item>
-        <!-- icon on the left of the text -->
-        <item name="iconGravity">textStart</item>
-        <!-- comfortable touch targets -->
-        <item name="android:padding">12dp</item>
-    </style>
+    
 </resources>
