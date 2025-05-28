@@ -1,0 +1,41 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expanded_text_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.LoginActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/home_background">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_margin="30dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp">
+
+
+        <EditText
+            android:id="@+id/thoughtOnTrial_expandedview"
+            android:layout_width="match_parent"
+            android:layout_height="315dp"
+            android:layout_gravity="center_vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarFadeDuration="@integer/material_motion_duration_long_2"
+            android:background="@drawable/custom_edit_text"
+            android:drawablePadding="8dp"
+            android:hint="Thought on trial"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

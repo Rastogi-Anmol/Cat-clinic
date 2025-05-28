@@ -2,6 +2,7 @@ package com.example.catclinic.views;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -64,6 +65,20 @@ public class JudgementDayActivity extends AppCompatActivity {
                 judgementDayController.createJudgmentDayEntry(thought, evidence, denial, verdict, submittedJudgment -> {
                     Toast.makeText(JudgementDayActivity.this, "judgment saved", LENGTH_SHORT).show();
                 }, e -> Toast.makeText(JudgementDayActivity.this, e.getMessage(), LENGTH_SHORT).show());
+            }
+        }));
+
+        thoughtOnTrial.setOnLongClickListener((new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                Intent expandTextView = new Intent(JudgementDayActivity.this, expanded_textView.class);
+
+                expandTextView.putExtra("Hint_Name", "Thought On Trial");
+
+                String thought = thoughtOnTrial.getText().toString().trim();
+
+                expandTextView.putExtra("Value", thought);
             }
         }));
 
