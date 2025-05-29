@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -24,6 +26,7 @@ public class JudgementDayActivity extends AppCompatActivity {
 
     private JudgementDayController judgementDayController;
     private EditText thoughtOnTrial, evidenceFor, evidenceAgainst, finalVerdict;
+    private ActivityResultLauncher<Intent> expandedLauncher;
     private Button submitButton;
 
     @Override
@@ -32,11 +35,22 @@ public class JudgementDayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_judgement_day_activity);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        expandedLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Intent data = result.getData();
+                        int sourceId    = data.getIntExtra("EXTRA_SOURCE_ID", -1);
+                        String newText  = data.getStringExtra("EXTRA_TEXT");
+                        if (sourceId != -1 && newText != null) {
+                            // Update the correct EditText
+                            EditText target = findViewById(sourceId);
+                            target.setText(newText);
+                        }
+                    }
+                }
+        );
 
         judgementDayController = new JudgementDayController(this);
 
@@ -68,19 +82,33 @@ public class JudgementDayActivity extends AppCompatActivity {
             }
         }));
 
-        thoughtOnTrial.setOnLongClickListener((new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
+        thoughtOnTrial.setOnLongClickListener(v -> {
+            openEditor(thoughtOnTrial);
+            return true;
+        });
 
-                Intent expandTextView = new Intent(JudgementDayActivity.this, expanded_textView.class);
+        evidenceFor.setOnLongClickListener(v -> {
+            openEditor(evidenceFor);
+            return true;
+        });
 
-                expandTextView.putExtra("Hint_Name", "Thought On Trial");
+        evidenceAgainst.setOnLongClickListener(v -> {
+            openEditor(evidenceAgainst);
+            return true;
+        });
 
-                String thought = thoughtOnTrial.getText().toString().trim();
+        finalVerdict.setOnLongClickListener(v -> {
+            openEditor(finalVerdict);
+            return true;
+        });
 
-                expandTextView.putExtra("Value", thought);
-            }
-        }));
+    }
 
+    private void openEditor(EditText which) {
+        Intent i = new Intent(this, expanded_textView.class);
+        i.putExtra("EXTRA_SOURCE_ID", which.getId());
+        i.putExtra("EXTRA_TEXT", which.getText().toString());
+        i.putExtra("EXTRA_HINT", which.getHint().toString());
+        expandedLauncher.launch(i);
     }
 }
