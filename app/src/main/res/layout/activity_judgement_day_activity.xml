@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.LoginActivity"
+    android:background="@drawable/background_thoughts_on_trial"
+    android:fillViewport="true">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:clipToPadding="false"
+        android:clipChildren="false">
+
+
+        <!-- "The Thought" heading -->
+        <ImageView
+            android:id="@+id/ivThought"
+            android:layout_width="194dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/the_thought" />
+
+
+        <!-- "Cat" Image -->
+        <ImageView
+            android:id="@+id/cat1"
+            android:layout_width="177dp"
+            android:layout_height="231dp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/thoughtOnTrial"
+            android:layout_marginEnd="-70dp"
+            android:layout_marginBottom="-104dp"
+            android:src="@drawable/cat_2" />
+
+        <!-- EditText for "The Thought" -->
+        <EditText
+            android:id="@+id/thoughtOnTrial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="100dp"
+            android:background="@xml/custom_edit_text"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:drawablePadding="8dp"
+            android:layout_below="@id/ivThought"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-2dp" />
+
+        <!-- "Cat" Image -->
+        <ImageView
+            android:id="@+id/cat2"
+            android:layout_width="203dp"
+            android:layout_height="258dp"
+            android:layout_below="@+id/thoughtOnTrial"
+            android:layout_marginStart="-50dp"
+            android:layout_marginTop="-25dp"
+            android:src="@drawable/cat_3" />
+
+        <!-- "The Defense" heading -->
+        <ImageView
+            android:id="@+id/ivDefense"
+            android:layout_width="197dp"
+            android:layout_height="65dp"
+            android:src="@drawable/the_defense"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="24dp"
+            android:layout_below="@id/thoughtOnTrial"
+            android:layout_marginTop="120dp" />
+
+        <!-- EditText for "Evidence For" -->
+        <EditText
+            android:id="@+id/evidenceFor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="24dp"
+            android:background="@xml/custom_edit_text"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:drawablePadding="8dp"
+            android:layout_below="@id/ivDefense"
+            android:layout_alignParentEnd="true" />
+
+        <!-- "Cat" Image -->
+        <ImageView
+            android:id="@+id/cat3"
+            android:layout_width="203dp"
+            android:layout_height="258dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/evidenceFor"
+            android:layout_marginTop="-25dp"
+            android:layout_marginEnd="-50dp"
+            android:src="@drawable/cat_5" />
+
+        <!-- "The Prosecution" heading -->
+        <ImageView
+            android:id="@+id/ivProsecution"
+            android:layout_width="236dp"
+            android:layout_height="65dp"
+            android:src="@drawable/the_prosecution"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="14dp"
+            android:layout_below="@id/evidenceFor"
+            android:layout_marginTop="120dp" />
+
+        <!-- EditText for "Evidence Against" -->
+        <EditText
+            android:id="@+id/evidenceAgainst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:layout_marginStart="24dp"
+            android:background="@xml/custom_edit_text"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:drawablePadding="8dp"
+            android:layout_below="@id/ivProsecution"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-10dp" />
+
+        <!-- "Cat" Image -->
+        <ImageView
+            android:id="@+id/cat4"
+            android:layout_width="210dp"
+            android:layout_height="292dp"
+            android:layout_below="@+id/evidenceAgainst"
+            android:layout_marginStart="-100dp"
+            android:layout_marginTop="-53dp"
+            android:src="@drawable/cat_4" />
+
+        <!-- "The Final Verdict" heading -->
+        <ImageView
+            android:id="@+id/ivFinalVerdict"
+            android:layout_width="281dp"
+            android:layout_height="55dp"
+            android:src="@drawable/the_final_verdict"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_below="@id/evidenceAgainst"
+            android:layout_marginTop="120dp" />
+
+        <!-- EditText for "Final Verdict" -->
+        <EditText
+            android:id="@+id/finalVerdict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="24dp"
+            android:background="@xml/custom_edit_text"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:drawablePadding="8dp"
+            android:layout_below="@id/ivFinalVerdict"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-5dp" />
+
+        <!-- Submit button -->
+        <Button
+            android:id="@+id/judgementButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="24dp"
+            android:text="@string/submit"
+            android:textSize="18sp"
+            android:backgroundTint="@color/pastel_coral"
+            app:cornerRadius="20dp"
+            android:layout_below="@id/finalVerdict"
+            android:layout_marginTop="30dp" />
+
+    </RelativeLayout>
+
+</ScrollView>

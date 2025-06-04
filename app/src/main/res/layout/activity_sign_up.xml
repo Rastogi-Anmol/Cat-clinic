@@ -36,11 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_userid"
-                android:background="@drawable/custom_edit_text"
+                android:background="@xml/custom_edit_text"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="User ID"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@xml/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black" />
 
@@ -48,11 +48,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_name"
-                android:background="@drawable/custom_edit_text"
+                android:background="@xml/custom_edit_text"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Username"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@xml/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black" />
 
@@ -60,11 +60,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_password"
-                android:background="@drawable/custom_edit_text"
+                android:inputType="textPassword"
+                android:background="@xml/custom_edit_text"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Password"
-                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableStart="@xml/baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
 
@@ -72,11 +73,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_password_confirm"
-                android:background="@drawable/custom_edit_text"
+                android:background="@xml/custom_edit_text"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Confirm Password"
-                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableStart="@xml/baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
 
@@ -100,8 +101,6 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/pastel_coral"
                 android:textSize="18sp"/>
-
-
 
         </LinearLayout>
 
