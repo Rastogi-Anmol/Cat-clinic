@@ -2,6 +2,7 @@ package com.example.catclinic.views;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.example.catclinic.R;
 import com.example.catclinic.controllers.JudgementDayController;
 
@@ -31,11 +29,8 @@ public class JudgementDayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_judgement_day_activity);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+
 
         judgementDayController = new JudgementDayController(this);
 
@@ -51,6 +46,8 @@ public class JudgementDayActivity extends AppCompatActivity {
 
         submitButton = findViewById(R.id.judgementButton);
 
+
+        //submit button to submit the users input
         submitButton.setOnClickListener((new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -67,5 +64,8 @@ public class JudgementDayActivity extends AppCompatActivity {
             }
         }));
 
-    }
-}
+
+
+
+
+}}

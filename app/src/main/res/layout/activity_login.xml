@@ -36,11 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_id"
-                android:background="@drawable/custom_edit_text"
+                android:background="@xml/custom_edit_text"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
                 android:hint="UserID"
-                android:drawableStart="@drawable/baseline_person_24"
+                android:drawableStart="@xml/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black" />
 
@@ -48,11 +48,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_password"
-                android:background="@drawable/custom_edit_text"
+                android:background="@xml/custom_edit_text"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Password"
-                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableStart="@xml/baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
 
@@ -64,7 +64,8 @@
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/pastel_coral"
-                app:cornerRadius="20dp"/>
+                app:cornerRadius="20dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"

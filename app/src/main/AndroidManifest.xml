@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CatClinic"
         tools:targetApi="31">
         <activity
+            android:name=".views.expanded_textView"
+            android:exported="false" />
+        <activity
             android:name=".views.JudgementDayActivity"
             android:exported="false" />
         <activity
@@ -24,7 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".views.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
