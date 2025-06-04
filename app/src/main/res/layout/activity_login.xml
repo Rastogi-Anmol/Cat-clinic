@@ -52,6 +52,7 @@
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:drawableStart="@xml/baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>

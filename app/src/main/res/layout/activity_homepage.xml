@@ -19,7 +19,6 @@
         <!-- Emergency -->
         <ImageButton
             android:id="@+id/btnEmergency"
-            android:="100dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -33,7 +32,6 @@
         <ImageButton
             android:id="@+id/btnExercises"
             android:layout_width="0dp"
-            android:elevation="100dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"

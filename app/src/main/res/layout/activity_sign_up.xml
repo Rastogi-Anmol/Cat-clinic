@@ -60,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_password"
+                android:inputType="textPassword"
                 android:background="@xml/custom_edit_text"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
