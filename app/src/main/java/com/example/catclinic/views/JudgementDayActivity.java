@@ -30,8 +30,6 @@ public class JudgementDayActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_judgement_day_activity);
 
-
-
         judgementDayController = new JudgementDayController(this);
 
         //declaring variables from the view
@@ -60,12 +58,9 @@ public class JudgementDayActivity extends AppCompatActivity {
 
                 judgementDayController.createJudgmentDayEntry(thought, evidence, denial, verdict, submittedJudgment -> {
                     Toast.makeText(JudgementDayActivity.this, "judgment saved", LENGTH_SHORT).show();
+                    finish();
                 }, e -> Toast.makeText(JudgementDayActivity.this, e.getMessage(), LENGTH_SHORT).show());
             }
         }));
-
-
-
-
-
-}}
+    }
+}
