@@ -57,6 +57,13 @@ public class SignUpController {
         boolean hasUpper = password.matches(".*[A-Z].*");
         boolean hasLower = password.matches(".*[a-z].*");
         boolean hasSpecialCharacter = password.matches(".*[!@#$&].*");
+        boolean hasSpace = password.matches(".*//s.*");
+
+        if(!hasSpace)
+        {
+            onFailure.onFailure(new Exception("Password cannot have empty spaces in it"));
+            return;
+        }
 
         if(!hasDigit || !hasUpper || !hasLower || !hasSpecialCharacter)
         {
