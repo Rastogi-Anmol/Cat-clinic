@@ -56,10 +56,11 @@ public class SignUpController {
         boolean hasDigit = password.matches(".*[0-9].*");
         boolean hasUpper = password.matches(".*[A-Z].*");
         boolean hasLower = password.matches(".*[a-z].*");
+        boolean hasSpecialCharacter = password.matches(".*[!@#$&].*");
 
-        if(!hasDigit || !hasUpper || !hasLower)
+        if(!hasDigit || !hasUpper || !hasLower || !hasSpecialCharacter)
         {
-            onFailure.onFailure(new Exception("Password must have at least one upper case, one lower case and one digit in it"));
+            onFailure.onFailure(new Exception("Password must have at least one upper case, one lower case, one digit in it and one special character"));
             return;
         }
 
