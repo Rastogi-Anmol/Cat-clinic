@@ -3,11 +3,14 @@ package com.example.catclinic.views;
 import static android.widget.Toast.LENGTH_SHORT;
 
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +25,7 @@ public class JudgementDayActivity extends AppCompatActivity {
     private JudgementDayController judgementDayController;
     private EditText thoughtOnTrial, evidenceFor, evidenceAgainst, finalVerdict;
     private Button submitButton;
+    private ImageView history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,9 @@ public class JudgementDayActivity extends AppCompatActivity {
 
         submitButton = findViewById(R.id.judgementButton);
 
+        history = findViewById(R.id.cat1);
+
+
 
         //submit button to submit the users input
         submitButton.setOnClickListener((new View.OnClickListener() {
@@ -62,5 +69,12 @@ public class JudgementDayActivity extends AppCompatActivity {
                 }, e -> Toast.makeText(JudgementDayActivity.this, e.getMessage(), LENGTH_SHORT).show());
             }
         }));
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(JudgementDayActivity.this, JudgementDayHistoryActivity.class));
+            }
+        });
     }
 }

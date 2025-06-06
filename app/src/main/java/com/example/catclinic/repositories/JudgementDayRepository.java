@@ -14,7 +14,7 @@ public class JudgementDayRepository {
 
     private FirebaseFirestore db;
 
-    private CollectionReference JudgemnentDayRef;
+    private CollectionReference JudgementDayRef;
 
     private static JudgementDayRepository instance; //singleton instance
 
@@ -22,7 +22,7 @@ public class JudgementDayRepository {
 
     public JudgementDayRepository() {
         db = FirebaseFirestore.getInstance();
-        JudgemnentDayRef = db.collection(collection);
+        JudgementDayRef = db.collection(collection);
     }
 
     public static JudgementDayRepository getInstance(){
@@ -33,23 +33,33 @@ public class JudgementDayRepository {
     public void addJudgementDayEntry(JudgementDayEntry judgementDayEntry,
                                      OnSuccessListener<JudgementDayEntry> onSuccess,
                                      OnFailureListener onFailure){
-        JudgemnentDayRef.add(judgementDayEntry)
+        JudgementDayRef.add(judgementDayEntry)
                 .addOnSuccessListener(doc -> onSuccess.onSuccess(judgementDayEntry))
                 .addOnFailureListener(e -> new Exception("Judgement Day Entry could not be saved"));
     }
 
-//    public void findLatestJudgementDayEntry(String UserID,
-//                                      OnSuccessListener<JudgementDayEntry> onSuccess,
-//                                      OnFailureListener onFailureListener){
-//        JudgementDayRef.whereEqualTo("userID", UserID)
-//                .orderBy("postingTime", Query.Direction.DESCENDING)
-//                .limit(1)
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                            JudgementDayEntry judgementDayEntry =
-//                    }
-//                })
-//    }
+    public void findLatestJudgementDayEntry(String UserID,
+                                      OnSuccessListener<JudgementDayEntry> onSuccess,
+                                      OnFailureListener onFailureListener){
+        JudgementDayRef.whereEqualTo("userID", UserID)
+                .orderBy("postingTime", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    }
+                });
+    }
+
+    public void findAllEntriesByUser(String userID,
+                                     OnSuccessListener<QuerySnapshot> onSuccess,
+                                     OnFailureListener onFailure) {
+        JudgementDayRef
+                .whereEqualTo("userID", userID)
+                .orderBy("postingTime", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(onSuccess)
+                .addOnFailureListener(onFailure);
+    }
 }

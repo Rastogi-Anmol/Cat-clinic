@@ -1,7 +1,13 @@
 package com.example.catclinic.models;
-
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
+import com.google.firebase.firestore.Exclude;
 
 public class JudgementDayEntry {
+
+
+    @Exclude
+    private String documentID;
 
     private String userID;
     private String username;
@@ -14,7 +20,8 @@ public class JudgementDayEntry {
 
     private String finalVerdict;
 
-    private String postingTime;
+    @ServerTimestamp
+    private Timestamp postingTime;
 
     public JudgementDayEntry() {
     }
@@ -25,15 +32,13 @@ public class JudgementDayEntry {
                              String thoughtOnTrial,
                              String evidenceFor,
                              String evidenceAgainst,
-                             String finalVerdict,
-                             String postingTime) {
+                             String finalVerdict) {
         this.userID = userID;
         this.username = username;
         this.thoughtOnTrial = thoughtOnTrial;
         this.evidenceFor = evidenceFor;
         this.evidenceAgainst = evidenceAgainst;
         this.finalVerdict = finalVerdict;
-        this.postingTime = postingTime; //temporary
     }
 
 
@@ -77,11 +82,11 @@ public class JudgementDayEntry {
         this.evidenceAgainst = evidenceAgainst;
     }
 
-    public String getPostingTime() {
+    public Timestamp getPostingTime() {
         return postingTime;
     }
 
-    public void setPostingTime(String postingTime) {
+    public void setPostingTime(Timestamp postingTime) {
         this.postingTime = postingTime;
     }
 
@@ -93,7 +98,13 @@ public class JudgementDayEntry {
         this.finalVerdict = finalVerdict;
     }
 
+    @Exclude
+    public String getDocumentID() {
+        return documentID;
+    }
 
-
-
+    @Exclude
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
 }

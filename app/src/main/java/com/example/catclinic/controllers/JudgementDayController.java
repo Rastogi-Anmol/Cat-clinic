@@ -50,13 +50,11 @@ public class JudgementDayController {
         //get the
         String userId = sessionManager.getUserID();
         String userName = sessionManager.getUsername();
-        ZonedDateTime zonedDateTime = Clock.systemDefaultZone().instant().atZone(ZoneId.systemDefault());
-        String postingTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(zonedDateTime);
 
         JudgementDayEntry judgementDayEntry = new JudgementDayEntry(userId,
                                             userName, thoughtOnTrial,
                                             evidenceFor, evidenceAgainst,
-                                            finalVerdict, postingTime);
+                                            finalVerdict);
 
         JudgementDayRepository.getInstance().addJudgementDayEntry(judgementDayEntry, onSuccess, onFailure);
 
