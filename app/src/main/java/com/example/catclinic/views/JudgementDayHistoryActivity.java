@@ -18,6 +18,7 @@ import com.example.catclinic.services.SessionManager;
 import com.example.catclinic.utils.JudgementDayViewAdapter;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,13 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
                                 JudgementDayEntry entry = docSnap.toObject(JudgementDayEntry.class);
                                 if (entry != null) {
                                     entry.setDocumentID(docSnap.getId());
+
+                                    try {
+                                        controller.decrypt(entry);
+                                    } catch (IOException e) {
+                                        Toast.makeText(JudgementDayHistoryActivity.this, "decryption failed", Toast.LENGTH_SHORT).show();
+                                    }
+
                                     entryList.add(entry);
                                 }
                             }

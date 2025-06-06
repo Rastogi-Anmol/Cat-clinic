@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.catclinic.R;
 import com.example.catclinic.controllers.JudgementDayController;
 
+import java.io.IOException;
+
 public class JudgementDayActivity extends AppCompatActivity {
 
     private JudgementDayController judgementDayController;
@@ -63,10 +65,14 @@ public class JudgementDayActivity extends AppCompatActivity {
                 String denial = evidenceAgainst.getText().toString().trim();
                 String verdict = finalVerdict.getText().toString().trim();
 
-                judgementDayController.createJudgmentDayEntry(thought, evidence, denial, verdict, submittedJudgment -> {
-                    Toast.makeText(JudgementDayActivity.this, "judgment saved", LENGTH_SHORT).show();
-                    finish();
-                }, e -> Toast.makeText(JudgementDayActivity.this, e.getMessage(), LENGTH_SHORT).show());
+                try {
+                    judgementDayController.createJudgmentDayEntry(thought, evidence, denial, verdict, submittedJudgment -> {
+                        Toast.makeText(JudgementDayActivity.this, "judgment saved", LENGTH_SHORT).show();
+                        finish();
+                    }, e -> Toast.makeText(JudgementDayActivity.this, e.getMessage(), LENGTH_SHORT).show());
+                } catch (IOException e) {
+                    Toast.makeText(JudgementDayActivity.this,"Encryption failed", LENGTH_SHORT).show();
+                }
             }
         }));
 

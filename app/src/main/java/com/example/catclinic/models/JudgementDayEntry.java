@@ -19,9 +19,27 @@ public class JudgementDayEntry {
     private String evidenceAgainst;
 
     private String finalVerdict;
-
     @ServerTimestamp
     private Timestamp postingTime;
+
+
+    public JudgementDayEntry(String documentID,
+                             String userID,
+                             String username,
+                             String thoughtOnTrial,
+                             String evidenceFor,
+                             String evidenceAgainst,
+                             String finalVerdict,
+                             Timestamp postingTime) {
+        this.documentID = documentID;
+        this.userID = userID;
+        this.username = username;
+        this.thoughtOnTrial = thoughtOnTrial;
+        this.evidenceFor = evidenceFor;
+        this.evidenceAgainst = evidenceAgainst;
+        this.finalVerdict = finalVerdict;
+        this.postingTime = postingTime;
+    }
 
     public JudgementDayEntry() {
     }
