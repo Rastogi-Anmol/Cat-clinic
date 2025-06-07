@@ -71,7 +71,9 @@ public class JudgementDayActivity extends AppCompatActivity {
                         finish();
                     }, e -> Toast.makeText(JudgementDayActivity.this, e.getMessage(), LENGTH_SHORT).show());
                 } catch (IOException e) {
-                    Toast.makeText(JudgementDayActivity.this,"Encryption failed", LENGTH_SHORT).show();
+                    Toast.makeText(JudgementDayActivity.this,"Encryption failed 1", LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(JudgementDayActivity.this,"Encryption failed 2", LENGTH_SHORT).show();
                 }
             }
         }));

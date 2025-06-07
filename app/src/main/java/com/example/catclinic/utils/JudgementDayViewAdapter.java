@@ -31,7 +31,9 @@ public class JudgementDayViewAdapter extends RecyclerView.Adapter<JudgementDayVi
 
     @Override
     public void onBindViewHolder(@NonNull JudgementDayViewHolder holder, int position) {
-        holder.activity.setText(String.format("Thought on Trial: %s", items.get(position).getThoughtOnTrial()));
+        holder.activity.setText(String.format("Thought on Trial: %s \n evidence For: %s \n evidence against: %s \n final verdict: %S"
+                , items.get(position).getThoughtOnTrial(), items.get(position).getEvidenceFor(), items.get(position).getEvidenceAgainst()
+        , items.get(position).getFinalVerdict()));
         holder.time.setText(items.get(position).getPostingTime().toDate().toString());
         holder.date.setText(items.get(position).getPostingTime().toDate().toString());
     }

@@ -81,7 +81,7 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
 
                                     try {
                                         controller.decrypt(entry);
-                                    } catch (IOException e) {
+                                    } catch (Exception e) {
                                         Toast.makeText(JudgementDayHistoryActivity.this, "decryption failed", Toast.LENGTH_SHORT).show();
                                     }
 

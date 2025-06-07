@@ -22,6 +22,35 @@ public class JudgementDayEntry {
     @ServerTimestamp
     private Timestamp postingTime;
 
+    private String encryptedSessionKey;
+
+    public String getEncryptedSessionKey() {
+        return encryptedSessionKey;
+    }
+
+    public JudgementDayEntry(String userID,
+                             String username,
+                             String thoughtOnTrial,
+                             String evidenceFor,
+                             String evidenceAgainst,
+                             String finalVerdict,
+                             String encryptedSessionKey) {
+        this.userID = userID;
+        this.username = username;
+        this.thoughtOnTrial = thoughtOnTrial;
+        this.evidenceFor = evidenceFor;
+        this.evidenceAgainst = evidenceAgainst;
+        this.finalVerdict = finalVerdict;
+        this.encryptedSessionKey = encryptedSessionKey;
+    }
+
+    public void setEncryptedSessionKey(String encryptedSessionKey) {
+        this.encryptedSessionKey = encryptedSessionKey;
+    }
+
+
+
+
 
     public JudgementDayEntry(String documentID,
                              String userID,

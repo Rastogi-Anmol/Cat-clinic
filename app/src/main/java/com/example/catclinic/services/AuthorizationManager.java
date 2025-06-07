@@ -1,6 +1,12 @@
 package com.example.catclinic.services;
 
+import static java.util.Base64.getEncoder;
+
 import android.content.Context;
+import android.os.Build;
+
+
+import org.apache.commons.codec.binary.Base64;
 
 import com.example.catclinic.models.Users;
 import com.example.catclinic.repositories.usersRepository;
@@ -10,6 +16,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
+
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class AuthorizationManager {
 
@@ -19,6 +31,7 @@ public class AuthorizationManager {
     public AuthorizationManager(Context context){
         sessionManager = new SessionManager(context);
     }
+
 
     public void signUpUser(String userID,
                            String username,
@@ -32,7 +45,8 @@ public class AuthorizationManager {
                 onFailure.onFailure(new Exception("User already exsists"));
             }
             else{
-                Users signupUser = new Users(userID, username, generateHashedPassword(password));
+                Users signupUser = new Users(userID, username, keyGenerationManager.generateHashedPassword(password),
+                        keyGenerationManager.generateSalt());
                 usersRepository.getInstance().addUser(signupUser, onSuccess, onFailure);
                 onSuccess.onSuccess(signupUser);
             }
@@ -41,17 +55,23 @@ public class AuthorizationManager {
     }
 
     public void LoginUser(String userID,
-                         String password,
-                         OnSuccessListener<Users> onSuccess,
-                         OnFailureListener onFailure){
+                          String password,
+                          OnSuccessListener<Users> onSuccess,
+                          OnFailureListener onFailure){
 
         usersRepository.getInstance().doesUserExsist(userID, retrievedUser ->{
 
             if(retrievedUser != null){
-                String hashedPassword = generateHashedPassword(password);
-                if(retrievedUser.getHashedPassword().equals(hashedPassword))
+                String hashedPassword = keyGenerationManager.generateHashedPassword(password);
+                if(retrievedUser.getHashedPassword().equals(hashedPassword) && !retrievedUser.getSalt().isEmpty())
                 {
-                    sessionManager.userLoggedIn(userID, retrievedUser.getUsername(), generateEncryptionKey(password));
+                    try {
+                        sessionManager.userLoggedIn(userID, retrievedUser.getUsername(),
+                                keyGenerationManager.generateMasterKey(password,retrievedUser.getSalt()));
+                    } catch (Exception e) {
+                        onFailure.onFailure(new Exception("Encryption key generation Failed"));
+                        return;
+                    }
                     onSuccess.onSuccess(retrievedUser);
                 }
                 else{
@@ -63,57 +83,6 @@ public class AuthorizationManager {
             }
         },onFailure);
 
-    }
-    //standard SHA-256 code taken from
-    //https://medium.com/@AlexanderObregon/what-is-sha-256-hashing-in-java-0d46dfb83888
-    //generates a SHA-256 encoded password
-    public static String generateHashedPassword(String password){
-
-        try{
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-
-            byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder hexString = new StringBuilder();
-
-            for(byte b : encodedHash){
-                String hex = Integer.toHexString(0xff & b);
-                if(hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-
-            return hexString.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public static String generateEncryptionKey(String password){
-
-        try{
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-
-            byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder hexString = new StringBuilder();
-
-            for(byte b : encodedHash){
-                String hex = Integer.toHexString(0xff & b);
-                if(hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-
-            return hexString.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
