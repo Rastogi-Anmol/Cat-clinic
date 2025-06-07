@@ -10,16 +10,8 @@ import com.example.catclinic.models.JudgementDayEntry;
 import com.example.catclinic.repositories.JudgementDayRepository;
 import com.example.catclinic.services.EncryptionManager;
 import com.example.catclinic.services.SessionManager;
-import com.example.catclinic.services.keyGenerationManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Timestamp;
-
-import java.io.IOException;
-import java.time.Clock;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class JudgementDayController {
 
@@ -31,7 +23,6 @@ public class JudgementDayController {
         this.encryptionManager = new EncryptionManager(context);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void createJudgmentDayEntry(String thoughtOnTrial,
                                        String evidenceFor,
                                        String evidenceAgainst,
@@ -60,7 +51,7 @@ public class JudgementDayController {
         String userName = sessionManager.getUsername();
 
         //create the encryption keys
-        String sessionKey = keyGenerationManager.generateSessionKey();
+        String sessionKey = EncryptionManager.generateSessionKey();
 
 
         String encryptedSessionKey = sessionKey;

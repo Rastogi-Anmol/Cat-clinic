@@ -45,8 +45,8 @@ public class AuthorizationManager {
                 onFailure.onFailure(new Exception("User already exsists"));
             }
             else{
-                Users signupUser = new Users(userID, username, keyGenerationManager.generateHashedPassword(password),
-                        keyGenerationManager.generateSalt());
+                Users signupUser = new Users(userID, username, EncryptionManager.generateHashedPassword(password),
+                        EncryptionManager.generateSalt());
                 usersRepository.getInstance().addUser(signupUser, onSuccess, onFailure);
                 onSuccess.onSuccess(signupUser);
             }
@@ -62,12 +62,12 @@ public class AuthorizationManager {
         usersRepository.getInstance().doesUserExsist(userID, retrievedUser ->{
 
             if(retrievedUser != null){
-                String hashedPassword = keyGenerationManager.generateHashedPassword(password);
+                String hashedPassword = EncryptionManager.generateHashedPassword(password);
                 if(retrievedUser.getHashedPassword().equals(hashedPassword) && !retrievedUser.getSalt().isEmpty())
                 {
                     try {
                         sessionManager.userLoggedIn(userID, retrievedUser.getUsername(),
-                                keyGenerationManager.generateMasterKey(password,retrievedUser.getSalt()));
+                                EncryptionManager.generateMasterKey(password,retrievedUser.getSalt()));
                     } catch (Exception e) {
                         onFailure.onFailure(new Exception("Encryption key generation Failed"));
                         return;

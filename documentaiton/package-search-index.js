@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.catclinic"},{"l":"com.example.catclinic.controllers"},{"l":"com.example.catclinic.models"},{"l":"com.example.catclinic.repositories"},{"l":"com.example.catclinic.services"},{"l":"com.example.catclinic.utils"},{"l":"com.example.catclinic.views"}];updateSearchResults();
