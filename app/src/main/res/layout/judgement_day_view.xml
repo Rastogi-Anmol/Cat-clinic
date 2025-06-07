@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:padding="12dp"
+    android:background="@xml/custom_edit_text"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activityName"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:text="Thoughts on Trial"
+        android:fontFamily="sans-serif-medium"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityName"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/activityDate"
+        android:textSize="17dp"
+        android:text="12 June, 2025"
+        android:textAlignment="textEnd"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/activityDate"
+        android:id="@+id/activityTime"
+        android:text="12:24 pm"
+        android:textSize="17dp"
+        android:textAlignment="textEnd"/>
+
+
+
+
+</RelativeLayout>
+

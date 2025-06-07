@@ -33,6 +33,16 @@ public class HomepageActivity extends AppCompatActivity {
         history_btn = findViewById(R.id.btnHistory);
         progress_btn = findViewById(R.id.btnProgress);
 
+        SessionManager sessionManager = new SessionManager(this);
+
+        //temporary setup to see the derived key
+        history_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomepageActivity.this, sessionManager.getEncryptionKey(), LENGTH_SHORT).show();
+            }
+        });
+
 
         excercises_btn.setOnClickListener(new View.OnClickListener() {
             @Override

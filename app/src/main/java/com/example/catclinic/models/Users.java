@@ -6,6 +6,7 @@ public class Users {
     private String UserID;
     private String username;
     private String hashedPassword;
+    private String salt;
 
     //constructors
 
@@ -24,6 +25,13 @@ public class Users {
         this.username = username;
     }
 
+    public Users(String userID, String username, String hashedPassword, String salt) {
+        UserID = userID;
+        this.username = username;
+        this.hashedPassword = hashedPassword;
+        this.salt = salt;
+    }
+
     //setters
     public void setUserId(String userId) {
         this.UserID = userId;
@@ -37,6 +45,11 @@ public class Users {
         this.hashedPassword = hashedPassword;
     }
 
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+
     //getters
     public String getUsername(){
         return this.username;
@@ -48,6 +61,10 @@ public class Users {
 
     public String getHashedPassword(){
         return this.hashedPassword;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
 }

@@ -2,6 +2,9 @@ package com.example.catclinic.controllers;
 
 
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.catclinic.models.Users;
 import com.example.catclinic.services.AuthorizationManager;
@@ -16,6 +19,7 @@ public class SignUpController {
     public SignUpController(Context context){
         auth = new AuthorizationManager(context);
     }
+
 
 
     public void signUp(String userID, String username, String password, String confirmPassword, OnSuccessListener<Users> onSuccess, OnFailureListener onFailure){
@@ -59,7 +63,7 @@ public class SignUpController {
         boolean hasSpecialCharacter = password.matches(".*[!@#$&].*");
         boolean hasSpace = password.matches(".*//s.*");
 
-        if(!hasSpace)
+        if(hasSpace)
         {
             onFailure.onFailure(new Exception("Password cannot have empty spaces in it"));
             return;
