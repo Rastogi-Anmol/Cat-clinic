@@ -27,7 +27,7 @@ public class JudgementDayActivity extends AppCompatActivity {
     private JudgementDayController judgementDayController;
     private EditText thoughtOnTrial, evidenceFor, evidenceAgainst, finalVerdict;
     private Button submitButton;
-    private ImageView history;
+    private ImageView backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class JudgementDayActivity extends AppCompatActivity {
 
         submitButton = findViewById(R.id.judgementButton);
 
-        history = findViewById(R.id.cat1);
+        backBtn = findViewById(R.id.backBtn_JudgementDay);
 
 
 
@@ -78,11 +78,15 @@ public class JudgementDayActivity extends AppCompatActivity {
             }
         }));
 
-        history.setOnClickListener(new View.OnClickListener() {
+
+        //clicks back button to return to homepage
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(JudgementDayActivity.this, JudgementDayHistoryActivity.class));
+                startActivity(new Intent(JudgementDayActivity.this, HomepageActivity.class));
+                finish();
             }
         });
+
     }
 }

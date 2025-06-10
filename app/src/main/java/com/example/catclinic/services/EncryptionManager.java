@@ -31,6 +31,56 @@ public class EncryptionManager {
         this.sessionManager = new SessionManager(context);
     }
 
+    public String encryptSessionKey(String sessionKey) throws Exception {
+        String masterKey = this.sessionManager.getEncryptionKey();
+        return encryptBase64Data(sessionKey, masterKey);
+    }
+
+    public String decryptSessionKey(String sessionKey) throws Exception{
+        String masterKey = this.sessionManager.getEncryptionKey();
+        return decryptBase64Data(sessionKey, masterKey);
+    }
+
+    public String encryptData(String data, String sessionKey) throws Exception {
+        String compressedData = compressString(data);
+        return encryptBase64Data(compressedData, sessionKey);
+    }
+
+    public String decryptData(String data, String sessionKey) throws Exception {
+        String decryptedData = decryptBase64Data(data, sessionKey);
+        return uncompressString(decryptedData);
+    }
+
+    public static String generateSalt()
+    {
+        return generateRandomKey(16);
+    }
+
+    public static String generateSessionKey()
+    {
+        return generateRandomKey(32);
+    }
+
+    public static String generateMasterKey(String password, String saltString) throws Exception {
+        byte[] saltBytes = saltString.getBytes(StandardCharsets.UTF_8); // or Base64-decode if needed
+
+        int iterations = 100_000;
+        int keyLength = 256;
+
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, keyLength);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+
+        byte[] masterKeyBytes = factory.generateSecret(spec).getEncoded();
+        return Base64.encodeBase64String(masterKeyBytes);
+    }
+
+    private static String generateRandomKey(int numBytes) {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] key = new byte[numBytes];
+        secureRandom.nextBytes(key);  // Fills with secure random values
+        return Base64.encodeBase64String(key);
+    }
+
     private static String encryptBase64Data(String base64PlainText, String base64Key) throws Exception {
         byte[] keyBytes = Base64.decodeBase64(base64Key);
         byte[] plainBytes = Base64.decodeBase64(base64PlainText);
@@ -70,16 +120,6 @@ public class EncryptionManager {
         return Base64.encodeBase64String(decrypted);
     }
 
-
-    public String encryptSessionKey(String sessionKey, String masterKey) throws Exception {
-        return encryptBase64Data(sessionKey, masterKey);
-    }
-
-    public String decrpytSessionKey(String sessionKey, String masterKey) throws Exception{
-        return decryptBase64Data(sessionKey, masterKey);
-    }
-
-
     private static String compressString(String srcTxt) throws IOException {
         ByteArrayOutputStream rstBao = new ByteArrayOutputStream();
         GZIPOutputStream zos = new GZIPOutputStream(rstBao);
@@ -88,11 +128,6 @@ public class EncryptionManager {
 
         byte[] bytes = rstBao.toByteArray();
         return Base64.encodeBase64String(bytes);
-    }
-
-    public String encryptData(String data, String sessionKey) throws Exception {
-        String compressedData = compressString(data);
-        return encryptBase64Data(compressedData, sessionKey);
     }
 
     private static String uncompressString(String zippedBase64Str) throws IOException {
@@ -106,24 +141,6 @@ public class EncryptionManager {
             IOUtils.closeQuietly(zi);
         }
         return result;
-    }
-
-    public String decryptData(String data, String sessionKey) throws Exception {
-        String decrpytedData = decryptBase64Data(data, sessionKey);
-        return uncompressString(decrpytedData);
-    }
-
-    public static String generateMasterKey(String password, String saltString) throws Exception {
-        byte[] saltBytes = saltString.getBytes(StandardCharsets.UTF_8); // or Base64-decode if needed
-
-        int iterations = 100_000;
-        int keyLength = 256;
-
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, keyLength);
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-
-        byte[] masterKeyBytes = factory.generateSecret(spec).getEncoded();
-        return Base64.encodeBase64String(masterKeyBytes);
     }
 
 
@@ -155,24 +172,6 @@ public class EncryptionManager {
         }
     }
 
-    public static String generateSalt()
-    {
-        return generateRandomKey(16);
-    }
-
-    public static String generateSessionKey()
-    {
-        return generateRandomKey(32);
-    }
-
-
-
-    private static String generateRandomKey(int numBytes) {
-        SecureRandom secureRandom = new SecureRandom();
-        byte[] key = new byte[numBytes];
-        secureRandom.nextBytes(key);  // Fills with secure random values
-        return Base64.encodeBase64String(key);
-    }
 
 }
 
