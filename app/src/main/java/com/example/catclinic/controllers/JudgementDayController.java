@@ -1,10 +1,7 @@
 package com.example.catclinic.controllers;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.example.catclinic.models.JudgementDayEntry;
 import com.example.catclinic.repositories.JudgementDayRepository;
@@ -57,7 +54,7 @@ public class JudgementDayController {
         String encryptedSessionKey = sessionKey;
 
         try {
-            encryptedSessionKey = encryptionManager.encryptSessionKey(sessionKey, sessionManager.getEncryptionKey());
+            encryptedSessionKey = encryptionManager.encryptSessionKey(sessionKey);
         } catch (Exception e) {
             Log.e("JudgementDayController", "encryptSessionKey failed", e);
             onFailure.onFailure(new Exception("session Key encryption failed"));
@@ -83,8 +80,7 @@ public class JudgementDayController {
 
     public void decrypt(JudgementDayEntry judgementDayEntry) throws Exception {
 
-        String decrypted_sessionKey = encryptionManager.decrpytSessionKey(judgementDayEntry.getEncryptedSessionKey(),
-                this.sessionManager.getEncryptionKey());
+        String decrypted_sessionKey = encryptionManager.decryptSessionKey(judgementDayEntry.getEncryptedSessionKey());
         String decrypted_thoughtOnTrial = encryptionManager.decryptData(judgementDayEntry.getThoughtOnTrial(), decrypted_sessionKey);
         String decrypted_evidenceFor = encryptionManager.decryptData(judgementDayEntry.getEvidenceFor(), decrypted_sessionKey);
         String decrypted_evidenceAgainst = encryptionManager.decryptData(judgementDayEntry.getEvidenceAgainst(), decrypted_sessionKey);
