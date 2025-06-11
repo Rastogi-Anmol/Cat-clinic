@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp"
+    android:background="@drawable/judgement_day_background"
+    android:id="@+id/historyListView">
+
+    <!-- Back Button background -->
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@xml/custom_back_btn"
+        android:backgroundTint="@color/pastelPeach"
+        />
+
+
+    <!-- Back Button -->
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="23dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/back_btn_cat"
+        android:id="@+id/backBtn_JudgementDayHistory"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtn_JudgementDayHistory"
+        android:layout_marginTop="10dp"
+        tools:listitem="@layout/judgement_day_view"
+        android:id="@+id/history_list_view"/>
+
+</RelativeLayout>
+
+
+

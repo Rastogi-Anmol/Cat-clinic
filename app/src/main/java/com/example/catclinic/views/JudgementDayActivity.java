@@ -4,7 +4,6 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,7 @@ public class JudgementDayActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_judgement_day_activity);
+        setContentView(R.layout.activity_judgement_day);
 
         judgementDayController = new JudgementDayController(this);
 

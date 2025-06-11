@@ -1,6 +1,5 @@
 package com.example.catclinic.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +17,6 @@ import com.example.catclinic.services.SessionManager;
 import com.example.catclinic.utils.JudgementDayViewAdapter;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +30,11 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_judgement_day_history_activity);
+        setContentView(R.layout.activity_judgement_day_history);
 
 
         recyclerView = findViewById(R.id.history_list_view);
-        backBtn = findViewById(R.id.historyView_backbtn);
+        backBtn = findViewById(R.id.backBtn_JudgementDayHistory);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -70,10 +68,9 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
                 .findAllEntriesByUser(
                         userId,
                         querySnapshot -> {
-                            // 5a. Clear old data
+
                             entryList.clear();
 
-                            // 5b. Convert each document → JudgementDayEntry, inject documentId
                             for (DocumentSnapshot docSnap : querySnapshot.getDocuments()) {
                                 JudgementDayEntry entry = docSnap.toObject(JudgementDayEntry.class);
                                 if (entry != null) {
@@ -89,7 +86,6 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
                                 }
                             }
 
-                            // 5c. Tell RecyclerView to re‐draw
                             adapter.notifyDataSetChanged();
                         },
                         e -> {
