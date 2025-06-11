@@ -1,6 +1,7 @@
 package com.example.catclinic.utils;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,3 +21,4 @@ public class JudgementDayViewHolder extends RecyclerView.ViewHolder {
         time = itemView.findViewById(R.id.activityTime);
     }
 }
+

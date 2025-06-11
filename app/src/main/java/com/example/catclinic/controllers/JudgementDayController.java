@@ -93,4 +93,31 @@ public class JudgementDayController {
         judgementDayEntry.setFinalVerdict(decrypted_finalVerdict);
     }
 
+    public void update(String encryptedSessionKey,
+                       String documentID,
+                       String thoughtOnTrialEdit,
+                       String evidenceForEdit,
+                       String evidenceAgainstEdit,
+                       String finalVerdictEdit,
+                       OnSuccessListener<Void> onSuccess, OnFailureListener onFailure) throws Exception{
+
+        String decrypted_sessionKey = encryptionManager.decryptSessionKey(encryptedSessionKey);
+
+        String encrypted_thoughtOnTrialEdit = encryptionManager.encryptData(thoughtOnTrialEdit, decrypted_sessionKey);
+        String encrypted_evidenceForEdit = encryptionManager.encryptData(evidenceForEdit, decrypted_sessionKey);
+        String encrypted_evidenceAgainstEdit = encryptionManager.encryptData(evidenceAgainstEdit, decrypted_sessionKey);
+        String encrypted_finalVerdictEdit = encryptionManager.encryptData(finalVerdictEdit, decrypted_sessionKey);
+
+
+
+        JudgementDayRepository.getInstance().updateEntry(documentID,
+                encrypted_thoughtOnTrialEdit,
+                encrypted_evidenceForEdit,
+                encrypted_evidenceAgainstEdit,
+                encrypted_finalVerdictEdit,
+                onSuccess,
+                onFailure);
+    }
+
+
 }
