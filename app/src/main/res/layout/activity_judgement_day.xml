@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.LoginActivity"
-    android:background="@drawable/background_thoughts_on_trial"
+    android:background="@drawable/judgement_day_background"
     android:fillViewport="true">
 
 
@@ -19,6 +19,30 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
+        <!-- background for the back button -->
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:layout_margin="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:background="@xml/custom_back_btn"
+            android:backgroundTint="@color/pastelPeach"
+            />
+
+
+        <!-- Back Button -->
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="23dp"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/back_btn_cat"
+            android:id="@+id/backBtn_JudgementDay"
+            />
+
 
         <!-- "The Thought" heading -->
         <ImageView
@@ -27,8 +51,9 @@
             android:layout_height="70dp"
             android:layout_alignParentStart="true"
             android:layout_marginStart="14dp"
+            android:layout_below="@id/backBtn_JudgementDay"
             android:layout_marginTop="40dp"
-            android:src="@drawable/the_thought" />
+            android:src="@drawable/judgement_day_the_thought" />
 
 
         <!-- "Cat" Image -->
@@ -40,7 +65,7 @@
             android:layout_above="@+id/thoughtOnTrial"
             android:layout_marginEnd="-70dp"
             android:layout_marginBottom="-104dp"
-            android:src="@drawable/cat_2" />
+            android:src="@drawable/judgement_day_cat_1" />
 
         <!-- EditText for "The Thought" -->
         <EditText
@@ -65,14 +90,14 @@
             android:layout_below="@+id/thoughtOnTrial"
             android:layout_marginStart="-50dp"
             android:layout_marginTop="-25dp"
-            android:src="@drawable/cat_3" />
+            android:src="@drawable/judgement_day_cat_2" />
 
         <!-- "The Defense" heading -->
         <ImageView
             android:id="@+id/ivDefense"
             android:layout_width="197dp"
             android:layout_height="65dp"
-            android:src="@drawable/the_defense"
+            android:src="@drawable/judgement_day_the_defense"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="24dp"
             android:layout_below="@id/thoughtOnTrial"
@@ -101,14 +126,14 @@
             android:layout_below="@+id/evidenceFor"
             android:layout_marginTop="-25dp"
             android:layout_marginEnd="-50dp"
-            android:src="@drawable/cat_5" />
+            android:src="@drawable/judgement_day_cat_4" />
 
         <!-- "The Prosecution" heading -->
         <ImageView
             android:id="@+id/ivProsecution"
             android:layout_width="236dp"
             android:layout_height="65dp"
-            android:src="@drawable/the_prosecution"
+            android:src="@drawable/judgement_day_the_prosecution"
             android:layout_alignParentStart="true"
             android:layout_marginStart="14dp"
             android:layout_below="@id/evidenceFor"
@@ -137,14 +162,14 @@
             android:layout_below="@+id/evidenceAgainst"
             android:layout_marginStart="-100dp"
             android:layout_marginTop="-53dp"
-            android:src="@drawable/cat_4" />
+            android:src="@drawable/judgement_day_cat_3" />
 
         <!-- "The Final Verdict" heading -->
         <ImageView
             android:id="@+id/ivFinalVerdict"
             android:layout_width="281dp"
             android:layout_height="55dp"
-            android:src="@drawable/the_final_verdict"
+            android:src="@drawable/judgement_day_the_final_verdict"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
             android:layout_below="@id/evidenceAgainst"

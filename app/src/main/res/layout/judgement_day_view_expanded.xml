@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:padding="12dp"
+    android:background="@xml/custom_edit_text">
+
+    <TextView
+        android:id="@+id/activityNameExpanded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thoughts on Trial"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <TextView
+        android:id="@+id/activityDateExpanded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityNameExpanded"
+        android:text="12 June, 2025"
+        android:textSize="17sp"
+        android:textAlignment="textEnd" />
+
+    <TextView
+        android:id="@+id/activityTimeExpanded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityDateExpanded"
+        android:text="12:24 pm"
+        android:textSize="17sp"
+        android:textAlignment="textEnd" />
+
+    <!-- NEW: Horizontal container for the two half-width buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityTimeExpanded"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/editBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit" />
+
+        <!-- Optional spacing; you can also give the second button a marginStart -->
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete" />
+
+    </LinearLayout>
+
+</RelativeLayout>

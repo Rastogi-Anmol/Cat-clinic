@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.catclinic.R;
 import com.example.catclinic.controllers.LogInController;
+import com.example.catclinic.services.SessionManager;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -58,9 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 logInController.LogIn(user, password, retrievedUser -> {
                     Toast.makeText(LoginActivity.this, "Log-in successful!", LENGTH_SHORT).show();
-                    startActivity( new Intent(LoginActivity.this, JudgementDayActivity.class));
+                    startActivity( new Intent(LoginActivity.this, HomepageActivity.class));
                     finish();
-
                 }, e -> Toast.makeText(LoginActivity.this, e.getMessage(), LENGTH_SHORT).show());
             }
         });

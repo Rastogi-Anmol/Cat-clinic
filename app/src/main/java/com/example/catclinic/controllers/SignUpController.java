@@ -2,6 +2,9 @@ package com.example.catclinic.controllers;
 
 
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.catclinic.models.Users;
 import com.example.catclinic.services.AuthorizationManager;
@@ -16,6 +19,7 @@ public class SignUpController {
     public SignUpController(Context context){
         auth = new AuthorizationManager(context);
     }
+
 
 
     public void signUp(String userID, String username, String password, String confirmPassword, OnSuccessListener<Users> onSuccess, OnFailureListener onFailure){
@@ -40,8 +44,34 @@ public class SignUpController {
             return;
         }
 
+
         if(!confirmPassword.equals(password)){
             onFailure.onFailure(new Exception("Password and Confirm password does not match"));
+            return;
+        }
+
+        //length of password is too small
+        if(password.length() < 8)
+        {
+            onFailure.onFailure(new Exception("Password must be at least 8 characters long"));
+            return;
+        }
+
+        boolean hasDigit = password.matches(".*[0-9].*");
+        boolean hasUpper = password.matches(".*[A-Z].*");
+        boolean hasLower = password.matches(".*[a-z].*");
+        boolean hasSpecialCharacter = password.matches(".*[!@#$&].*");
+        boolean hasSpace = password.matches(".*//s.*");
+
+        if(hasSpace)
+        {
+            onFailure.onFailure(new Exception("Password cannot have empty spaces in it"));
+            return;
+        }
+
+        if(!hasDigit || !hasUpper || !hasLower || !hasSpecialCharacter)
+        {
+            onFailure.onFailure(new Exception("Password must have at least one upper case, one lower case, one digit in it and one special character"));
             return;
         }
 
