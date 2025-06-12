@@ -96,7 +96,6 @@ public class JudgementDayEditActivity extends AppCompatActivity {
                                                 "Entry updated!",
                                                 Toast.LENGTH_SHORT
                                         ).show();
-                                        startActivity(new Intent(JudgementDayEditActivity.this, JudgementDayHistoryActivity.class));
                                         finish();
                                     }
                                 },

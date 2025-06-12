@@ -93,6 +93,8 @@ public class JudgementDayController {
         judgementDayEntry.setFinalVerdict(decrypted_finalVerdict);
     }
 
+
+
     public void update(String encryptedSessionKey,
                        String documentID,
                        String thoughtOnTrialEdit,
@@ -117,6 +119,11 @@ public class JudgementDayController {
                 encrypted_finalVerdictEdit,
                 onSuccess,
                 onFailure);
+    }
+
+    public void delete(String documentID, OnSuccessListener<Void> onSuccess, OnFailureListener onFailure)
+    {
+        JudgementDayRepository.getInstance().deleteEntry(documentID, onSuccess,onFailure);
     }
 
 

@@ -6,16 +6,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.catclinic.R;
+import com.example.catclinic.controllers.JudgementDayController;
 import com.example.catclinic.models.JudgementDayEntry;
+import com.example.catclinic.repositories.JudgementDayRepository;
 import com.example.catclinic.views.JudgementDayActivity;
 import com.example.catclinic.views.JudgementDayEditActivity;
 import com.example.catclinic.views.JudgementDayHistoryActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FieldValue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JudgementDayViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -56,59 +63,21 @@ public class JudgementDayViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         JudgementDayEntry entry = items.get(position);
 
-        // Bind data based on current view type
-        if (getItemViewType(position) == TYPE_EXPANDED) {
-            JudgementDayExpandedViewHolder expandedHolder = (JudgementDayExpandedViewHolder) holder;
-            expandedHolder.activity.setText(entry.getThoughtOnTrial());
-            String dateTime = entry.getPostingTime().toDate().toString();
-            expandedHolder.date.setText(dateTime);
-            expandedHolder.time.setText(dateTime);
-
-
-            expandedHolder.editBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, JudgementDayEditActivity.class);
-
-                    // put each field you want to prefill
-                    intent.putExtra("EXTRA_THOUGHT",entry.getThoughtOnTrial());
-                    intent.putExtra("EXTRA_EVIDENCE_FOR",  entry.getEvidenceFor());
-                    intent.putExtra("EXTRA_EVIDENCE_AGAINST", entry.getEvidenceAgainst());
-                    intent.putExtra("EXTRA_FINAL_VERDICT", entry.getFinalVerdict());
-                    intent.putExtra(("SESSION_KEY"), entry.getEncryptedSessionKey());
-                    intent.putExtra(("DOCUMENT_ID"), entry.getDocumentID());
-
-                    context.startActivity(intent);
-                }
-            });
+        if (holder.getItemViewType() == TYPE_EXPANDED) {
+            ((JudgementDayExpandedViewHolder) holder).bind(entry, context);
         } else {
-            JudgementDayViewHolder normalHolder = (JudgementDayViewHolder) holder;
-            normalHolder.activity.setText(
-                    String.format(
-                            "Thought on Trial: %s\nEvidence For: %s\nEvidence Against: %s\nFinal Verdict: %s",
-                            entry.getThoughtOnTrial(),
-                            entry.getEvidenceFor(),
-                            entry.getEvidenceAgainst(),
-                            entry.getFinalVerdict()
-                    )
-            );
-            String dateTime = entry.getPostingTime().toDate().toString();
-            normalHolder.date.setText(dateTime);
-            normalHolder.time.setText(dateTime);
+            ((JudgementDayViewHolder) holder).bind(entry);
         }
 
-        // Use adapter position within listener, not the bind-time position
         holder.itemView.setOnClickListener(v -> {
             int adapterPos = holder.getAdapterPosition();
             if (adapterPos == RecyclerView.NO_POSITION) return;
 
             int previousExpanded = expandedPosition;
             if (expandedPosition == adapterPos) {
-                // collapse the currently expanded item
                 expandedPosition = -1;
                 notifyItemChanged(adapterPos);
             } else {
-                // expand the clicked item
                 expandedPosition = adapterPos;
                 notifyItemChanged(previousExpanded);
                 notifyItemChanged(expandedPosition);
@@ -120,4 +89,12 @@ public class JudgementDayViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public int getItemCount() {
         return items.size();
     }
+
+    public void updateList(List<JudgementDayEntry> newItems) {
+        this.items = new ArrayList<>(newItems);
+        expandedPosition = -1;
+        notifyDataSetChanged();
+    }
+
+
 }

@@ -5,8 +5,10 @@ import com.example.catclinic.views.JudgementDayActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -22,7 +24,9 @@ public class JudgementDayRepository {
 
     private String collection = "JudgementDayEntries";
 
-    public JudgementDayRepository() {
+    private ListenerRegistration registration;
+
+    private JudgementDayRepository() {
         db = FirebaseFirestore.getInstance();
         JudgementDayRef = db.collection(collection);
     }
@@ -92,4 +96,27 @@ public class JudgementDayRepository {
                 .addOnSuccessListener(onSuccess)
                 .addOnFailureListener(onFailure);
     }
+
+    public Query getCollection() {
+        return JudgementDayRef;
+    }
+
+
+    public ListenerRegistration listenToEntries(
+            String userId,
+            EventListener<QuerySnapshot> listener
+    ) {
+        return JudgementDayRef
+                .whereEqualTo("userID", userId)
+                .orderBy("postingTime", Query.Direction.DESCENDING)
+                .addSnapshotListener(listener);
+    }
+
+    /**
+     * Stop a previously-registered realtime listener.
+     */
+    public void stopListening(ListenerRegistration registration) {
+        if (registration != null) registration.remove();
+    }
+
 }
