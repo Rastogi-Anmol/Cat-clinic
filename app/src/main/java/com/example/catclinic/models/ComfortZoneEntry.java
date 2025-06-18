@@ -15,6 +15,9 @@ public class ComfortZoneEntry {
     private String tasksComfortable;
     private String tasksDoable;
 
+    @ServerTimestamp
+    private Timestamp postingTime;
+
     @Exclude
     public String getDocumentID() {
         return DocumentID;
@@ -65,8 +68,7 @@ public class ComfortZoneEntry {
         this.postingTime = postingTime;
     }
 
-    @ServerTimestamp
-    private Timestamp postingTime;
+
 
 
 

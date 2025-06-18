@@ -8,6 +8,7 @@ import com.example.catclinic.services.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ComfortZoneRepository {
@@ -41,6 +42,28 @@ public class ComfortZoneRepository {
                 addOnFailureListener(e -> new Exception("Adding the Comfort Zone Entry Failed"));
     }
 
-    
+    void deleteComfortZoneEntry(String documentID,
+                                OnSuccessListener<String> onSuccess,
+                                OnFailureListener onFailure){
+        ComfortZoneRef.document(documentID)
+                .delete()
+                .addOnSuccessListener(doc -> onSuccess.onSuccess(documentID))
+                .addOnFailureListener(e -> new Exception("Comfort Zone entry deletion failed"));
+    }
+
+    void updateComfortZoneEntry(String documentID,
+                                String tasksGoal,
+                                String tasksComfortable,
+                                String tasksDoable,
+                                OnSuccessListener<String> onSuccess,
+                                OnFailureListener onFailure){
+        ComfortZoneRef.document(documentID)
+                .update("tasksGoal", tasksGoal,
+                        "tasksComfortable", tasksComfortable
+                ,"tasksDoable", tasksDoable
+                ,"postingTime", FieldValue.serverTimestamp())
+                .addOnSuccessListener(doc -> onSuccess.onSuccess(documentID))
+                .addOnFailureListener(e -> new Exception("Update for Comfort Zone Entry Failed"));
+    }
 
 }
