@@ -10,10 +10,56 @@ public class ComfortZoneEntry {
     @Exclude
     private String DocumentID;
 
-    private String sessionKey;
+    private String UserID;
+
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String userID) {
+        UserID = userID;
+    }
+
+    public ComfortZoneEntry(String userID,
+                            String username,
+                            String encryptedSessionKey,
+                            String tasksGoal,
+                            String tasksComfortable,
+                            String tasksDoable) {
+        this.UserID = userID;
+        this.username = username;
+        this.encryptedSessionKey = encryptedSessionKey;
+        this.tasksGoal = tasksGoal;
+        this.tasksComfortable = tasksComfortable;
+        this.tasksDoable = tasksDoable;
+    }
+
+    public String getEncryptedSessionKey() {
+        return encryptedSessionKey;
+    }
+
+    public void setEncryptedSessionKey(String encryptedSessionKey) {
+        this.encryptedSessionKey = encryptedSessionKey;
+    }
+
+    private String encryptedSessionKey;
     private String tasksGoal;
     private String tasksComfortable;
     private String tasksDoable;
+
+    public ComfortZoneEntry() {
+    }
+
 
     @ServerTimestamp
     private Timestamp postingTime;
@@ -26,14 +72,6 @@ public class ComfortZoneEntry {
     @Exclude
     public void setDocumentID(String documentID) {
         DocumentID = documentID;
-    }
-
-    public String getSessionKey() {
-        return sessionKey;
-    }
-
-    public void setSessionKey(String sessionKey) {
-        this.sessionKey = sessionKey;
     }
 
     public String getTasksGoal() {

@@ -34,7 +34,7 @@ public class ComfortZoneRepository {
     }
 
 
-    void addComfortZoneEntry(ComfortZoneEntry comfortZoneEntry,
+    public void addComfortZoneEntry(ComfortZoneEntry comfortZoneEntry,
                              OnSuccessListener<ComfortZoneEntry> onSuccess,
                              OnFailureListener onFailure){
         ComfortZoneRef.add(comfortZoneEntry).
@@ -42,7 +42,7 @@ public class ComfortZoneRepository {
                 addOnFailureListener(e -> new Exception("Adding the Comfort Zone Entry Failed"));
     }
 
-    void deleteComfortZoneEntry(String documentID,
+    public void deleteComfortZoneEntry(String documentID,
                                 OnSuccessListener<String> onSuccess,
                                 OnFailureListener onFailure){
         ComfortZoneRef.document(documentID)
@@ -51,7 +51,7 @@ public class ComfortZoneRepository {
                 .addOnFailureListener(e -> new Exception("Comfort Zone entry deletion failed"));
     }
 
-    void updateComfortZoneEntry(String documentID,
+    public void updateComfortZoneEntry(String documentID,
                                 String tasksGoal,
                                 String tasksComfortable,
                                 String tasksDoable,

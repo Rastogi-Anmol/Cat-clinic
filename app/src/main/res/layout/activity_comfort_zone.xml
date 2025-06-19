@@ -70,6 +70,7 @@
         <!-- EditText for "The Thought" -->
         <EditText
             android:id="@+id/tasksComfortable"
+            android:hint="comfortable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -103,9 +104,10 @@
             android:layout_below="@id/tasksComfortable"
             android:layout_marginTop="120dp" />
 
-        <!-- EditText for "Evidence For" -->
+        <!-- EditText for Doable Tasks" -->
         <EditText
             android:id="@+id/tasksDoable"
+            android:hint="doable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
@@ -139,9 +141,10 @@
             android:layout_below="@id/tasksDoable"
             android:layout_marginTop="120dp" />
 
-        <!-- EditText for "Evidence Against" -->
+        <!-- EditText for "The Goal" -->
         <EditText
             android:id="@+id/tasksGoal"
+            android:hint="goal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"

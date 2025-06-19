@@ -59,5 +59,12 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        progress_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomepageActivity.this, ComfortZoneActivity.class));
+            }
+        });
+
     }
 }
