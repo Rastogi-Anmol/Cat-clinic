@@ -22,6 +22,9 @@
             android:name=".views.JudgementDayEditActivity"
             android:exported="false" />
         <activity
+            android:name=".views.ComfortZoneEditActivity"
+            android:exported="false"/>
+        <activity
             android:name=".views.HomepageActivity"
             android:exported="false" />
         <activity

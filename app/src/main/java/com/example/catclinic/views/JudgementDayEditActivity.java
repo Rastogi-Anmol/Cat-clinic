@@ -1,6 +1,7 @@
 package com.example.catclinic.views;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
 
 
 import android.content.Intent;
@@ -19,6 +20,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.catclinic.R;
 import com.example.catclinic.controllers.JudgementDayController;
+import com.example.catclinic.models.JudgementDayEntry;
+import com.example.catclinic.repositories.JudgementDayRepository;
+import com.example.catclinic.services.EncryptionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -30,6 +34,9 @@ public class JudgementDayEditActivity extends AppCompatActivity {
     private EditText thoughtOnTrial, evidenceFor, evidenceAgainst, finalVerdict;
     private Button submitButton;
     private ImageView backBtn;
+
+    private String sessionKey;
+
 
 
     @Override
@@ -58,19 +65,28 @@ public class JudgementDayEditActivity extends AppCompatActivity {
 
         //code to make sure if an edit is sent the
         Intent intent = getIntent();
-
-        // pull out the extras and set them
-        String thoughtIn    = intent.getStringExtra("EXTRA_THOUGHT");
-        String evidenceForIn   = intent.getStringExtra("EXTRA_EVIDENCE_FOR");
-        String evidenceAgainstIn = intent.getStringExtra("EXTRA_EVIDENCE_AGAINST");
-        String verdictIn    = intent.getStringExtra("EXTRA_FINAL_VERDICT");
-        String sessionKey = intent.getStringExtra("SESSION_KEY");
         String documentId = intent.getStringExtra("DOCUMENT_ID");
 
-        if (thoughtIn != null)         thoughtOnTrial.setText(thoughtIn);
-        if (evidenceForIn != null)     evidenceFor.setText(evidenceForIn);
-        if (evidenceAgainstIn != null) evidenceAgainst.setText(evidenceAgainstIn);
-        if (verdictIn != null)         finalVerdict.setText(verdictIn);
+        JudgementDayRepository.getInstance().getJudgementDayEntry(documentId, new OnSuccessListener<JudgementDayEntry>() {
+            @Override
+            public void onSuccess(JudgementDayEntry judgementDayEntry) {
+                JudgementDayController controller = new JudgementDayController(JudgementDayEditActivity.this);
+
+                try {
+                    controller.decrypt(judgementDayEntry);
+                } catch (Exception e) {
+                    Toast.makeText(JudgementDayEditActivity.this, "Decryption Failed : " + e.getMessage(), LENGTH_SHORT).show();
+                    finish();
+                }
+
+                thoughtOnTrial.setText(judgementDayEntry.getThoughtOnTrial());
+                evidenceFor.setText(judgementDayEntry.getEvidenceFor());
+                evidenceAgainst.setText(judgementDayEntry.getEvidenceAgainst());
+                finalVerdict.setText(judgementDayEntry.getFinalVerdict());
+                sessionKey = judgementDayEntry.getEncryptedSessionKey();
+
+            }
+        }, e -> makeText(JudgementDayEditActivity.this, "Entry for Edit Retrieval Failed :  :" + e.getMessage(), LENGTH_SHORT).show());
 
 
         submitButton.setText("Update");

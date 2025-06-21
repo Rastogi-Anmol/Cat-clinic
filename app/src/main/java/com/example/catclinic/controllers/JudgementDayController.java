@@ -2,6 +2,7 @@ package com.example.catclinic.controllers;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.catclinic.models.JudgementDayEntry;
 import com.example.catclinic.repositories.JudgementDayRepository;
@@ -125,6 +126,7 @@ public class JudgementDayController {
     {
         JudgementDayRepository.getInstance().deleteEntry(documentID, onSuccess,onFailure);
     }
+
 
 
 }

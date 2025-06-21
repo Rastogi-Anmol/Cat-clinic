@@ -69,6 +69,15 @@ public class JudgementDayRepository {
                 .addOnFailureListener(onFailure);
     }
 
+    public void getJudgementDayEntry(String documentID,
+                                     OnSuccessListener<JudgementDayEntry> onSuccess,
+                                     OnFailureListener onFailure){
+        JudgementDayRef.document(documentID)
+                .get().
+                addOnSuccessListener(doc -> onSuccess.onSuccess(doc.toObject(JudgementDayEntry.class)))
+                .addOnFailureListener(onFailure);
+    }
+
     public void deleteEntry(String documentId,OnSuccessListener<Void> onSuccess, OnFailureListener onFailure){
         JudgementDayRef
                 .document(documentId)

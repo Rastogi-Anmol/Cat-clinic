@@ -10,17 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.catclinic.R;
+import com.example.catclinic.controllers.CombinedHistoryController;
 import com.example.catclinic.controllers.JudgementDayHistoryController;
 import com.example.catclinic.models.JudgementDayEntry;
+import com.example.catclinic.utils.CombinedHistoryExpandedViewHolder;
+import com.example.catclinic.utils.CombinedHistoryViewAdapter;
 import com.example.catclinic.utils.JudgementDayViewAdapter;
 
 import java.util.List;
 
 public class JudgementDayHistoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private JudgementDayViewAdapter adapter;
+    private CombinedHistoryViewAdapter adapter;
     private ImageView backBtn;
-    private JudgementDayHistoryController historyController;
+    private CombinedHistoryController historyController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,10 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
         backBtn      = findViewById(R.id.backBtn_JudgementDayHistory);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new JudgementDayViewAdapter(this, List.of());
+        adapter = new CombinedHistoryViewAdapter(this, List.of());
         recyclerView.setAdapter(adapter);
 
-        historyController = new JudgementDayHistoryController(this);
+        historyController = new CombinedHistoryController(this);
 
         backBtn.setOnClickListener(v -> finish());
     }

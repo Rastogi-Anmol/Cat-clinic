@@ -40,11 +40,6 @@ public class JudgementDayExpandedViewHolder extends RecyclerView.ViewHolder {
 
         editBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, JudgementDayEditActivity.class);
-            intent.putExtra("EXTRA_THOUGHT", entry.getThoughtOnTrial());
-            intent.putExtra("EXTRA_EVIDENCE_FOR", entry.getEvidenceFor());
-            intent.putExtra("EXTRA_EVIDENCE_AGAINST", entry.getEvidenceAgainst());
-            intent.putExtra("EXTRA_FINAL_VERDICT", entry.getFinalVerdict());
-            intent.putExtra("SESSION_KEY", entry.getEncryptedSessionKey());
             intent.putExtra("DOCUMENT_ID", entry.getDocumentID());
             context.startActivity(intent);
         });

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.catclinic.models.ComfortZoneEntry;
 import com.example.catclinic.repositories.ComfortZoneRepository;
+import com.example.catclinic.repositories.JudgementDayRepository;
 import com.example.catclinic.services.EncryptionManager;
 import com.example.catclinic.services.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,5 +64,41 @@ public class ComfortZoneController {
 
         ComfortZoneRepository.getInstance().addComfortZoneEntry(comfortZoneEntry, onSuccess, onFailure);
 
+    }
+
+    public void decryptComfortZoneEntry(ComfortZoneEntry comfortZoneEntry) throws Exception{
+
+
+        String decryptedSessionKey = this.encryptionManager.decryptSessionKey(comfortZoneEntry.getEncryptedSessionKey());
+        String decryptedTasksComfortable = this.encryptionManager.decryptData(comfortZoneEntry.getTasksComfortable(), decryptedSessionKey);
+        String decryptedTasksDoable = this.encryptionManager.decryptData(comfortZoneEntry.getTasksDoable(), decryptedSessionKey);
+        String decryptedTasksGoal = this.encryptionManager.decryptData(comfortZoneEntry.getTasksGoal(), decryptedSessionKey);
+
+        comfortZoneEntry.setTasksComfortable(decryptedTasksComfortable);
+        comfortZoneEntry.setTasksDoable(decryptedTasksDoable);
+        comfortZoneEntry.setTasksGoal(decryptedTasksGoal);
+    }
+
+    public void updateComfortZoneEntry(String encryptedSessionKey,
+                                       String documentId,
+                                       String tasksComfortable,
+                                       String tasksDoable,
+                                       String tasksGoal,
+                                       OnSuccessListener<String> onSuccess,
+                                       OnFailureListener onFailure) throws Exception{
+
+        String decryptedSessionKey = this.encryptionManager.decryptSessionKey(encryptedSessionKey);
+
+        String encryptedTasksComfortable = this.encryptionManager.encryptData(tasksComfortable, decryptedSessionKey);
+        String encryptedTasksDoable= this.encryptionManager.encryptData(tasksDoable, decryptedSessionKey);
+        String encryptedTasksGoal = this.encryptionManager.encryptData(tasksGoal, decryptedSessionKey);
+
+
+        ComfortZoneRepository.getInstance().updateComfortZoneEntry(documentId,
+                encryptedTasksGoal, encryptedTasksComfortable, encryptedTasksDoable, onSuccess, onFailure);
+    }
+
+    public void delete(String documentID, OnSuccessListener<String> onSuccess, OnFailureListener onFailure) {
+        ComfortZoneRepository.getInstance().deleteComfortZoneEntry(documentID, onSuccess, onFailure);
     }
 }
