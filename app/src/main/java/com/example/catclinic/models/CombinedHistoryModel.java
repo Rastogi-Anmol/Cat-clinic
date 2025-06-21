@@ -1,8 +1,6 @@
 package com.example.catclinic.models;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
-public class HistoryWrapperModel {
+public class CombinedHistoryModel {
 
     String collectionName;
 
@@ -14,7 +12,7 @@ public class HistoryWrapperModel {
 
     String time;
 
-    public HistoryWrapperModel(String collectionName, String documentID, String topic, String date, String time) {
+    public CombinedHistoryModel(String collectionName, String documentID, String topic, String date, String time) {
         this.collectionName = collectionName;
         this.documentID = documentID;
         this.topic = topic;

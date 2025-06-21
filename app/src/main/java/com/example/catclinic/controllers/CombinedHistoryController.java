@@ -2,7 +2,7 @@ package com.example.catclinic.controllers;
 
 import android.content.Context;
 
-import com.example.catclinic.models.HistoryWrapperModel;
+import com.example.catclinic.models.CombinedHistoryModel;
 import com.example.catclinic.models.ComfortZoneEntry;
 import com.example.catclinic.models.JudgementDayEntry;
 import com.google.firebase.Timestamp;
@@ -25,7 +25,7 @@ public class CombinedHistoryController {
     private List<JudgementDayEntry> jdEntries = new ArrayList<>();
 
     // callbacks to the caller
-    private Consumer<List<HistoryWrapperModel>> onData;
+    private Consumer<List<CombinedHistoryModel>> onData;
     private Consumer<Exception> onError;
 
     public CombinedHistoryController(Context ctx) {
@@ -37,7 +37,7 @@ public class CombinedHistoryController {
      * Start listening to both collections.
      * Every time one updates, we rebuild and re-emit the merged list.
      */
-    public void startListening(Consumer<List<HistoryWrapperModel>> onData,
+    public void startListening(Consumer<List<CombinedHistoryModel>> onData,
                                Consumer<Exception> onError) {
         this.onData  = onData;
         this.onError = onError;
@@ -66,7 +66,7 @@ public class CombinedHistoryController {
 
     /** Map + merge + (optional) sort + emit */
     private void emitCombined() {
-        List<HistoryWrapperModel> merged = new ArrayList<>();
+        List<CombinedHistoryModel> merged = new ArrayList<>();
 
         // prepare your formatters once
         SimpleDateFormat dateFmt = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -74,12 +74,12 @@ public class CombinedHistoryController {
 
 
         for (ComfortZoneEntry e : czEntries) {
-            Timestamp ts = e.getPostingTime();               
+            Timestamp ts = e.getPostingTime();
             Date d  = ts.toDate();
             String  date = dateFmt.format(d);
             String  time = timeFmt.format(d);
 
-            merged.add(new HistoryWrapperModel(
+            merged.add(new CombinedHistoryModel(
                     "Goal",
                     e.getDocumentID(),
                     e.getTasksGoal(),
@@ -95,7 +95,7 @@ public class CombinedHistoryController {
             String  date = dateFmt.format(d);
             String  time = timeFmt.format(d);
 
-            merged.add(new HistoryWrapperModel(
+            merged.add(new CombinedHistoryModel(
                     "Thought on Trial",
                     e.getDocumentID(),
                     e.getThoughtOnTrial(),    // or e.getThoughtOnTrial()
@@ -107,7 +107,7 @@ public class CombinedHistoryController {
         Collections.sort(
                 merged,
                 // explicitly tell it: we’re comparing HistoryWrapperModel → String
-                Comparator.<HistoryWrapperModel,String>comparing(
+                Comparator.<CombinedHistoryModel,String>comparing(
                         w -> w.getDate() + " " + w.getTime()
                 ).reversed()
         );

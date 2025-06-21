@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.catclinic.R;
-import com.example.catclinic.models.HistoryWrapperModel;
+import com.example.catclinic.models.CombinedHistoryModel;
 
 
 import java.util.ArrayList;
@@ -22,12 +22,12 @@ public class CombinedHistoryViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private static final int TYPE_EXPANDED = 1;
 
     private Context context;
-    private List<HistoryWrapperModel> items;
+    private List<CombinedHistoryModel> items;
 
     // Track the single expanded item index
     private int expandedPosition = -1;
 
-    public CombinedHistoryViewAdapter(Context context, List<HistoryWrapperModel> items) {
+    public CombinedHistoryViewAdapter(Context context, List<CombinedHistoryModel> items) {
         this.context = context;
         this.items = items;
     }
@@ -53,7 +53,7 @@ public class CombinedHistoryViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        HistoryWrapperModel entry = items.get(position);
+        CombinedHistoryModel entry = items.get(position);
 
         if (holder.getItemViewType() == TYPE_EXPANDED) {
             ((CombinedHistoryExpandedViewHolder) holder).bind(entry, context);
@@ -83,7 +83,7 @@ public class CombinedHistoryViewAdapter extends RecyclerView.Adapter<RecyclerVie
         return items.size();
     }
 
-    public void updateList(List<HistoryWrapperModel> newItems){
+    public void updateList(List<CombinedHistoryModel> newItems){
         this.items = new ArrayList<>(newItems);
         expandedPosition = -1;
         notifyDataSetChanged();

@@ -16,7 +16,7 @@
             android:name=".views.ComfortZoneActivity"
             android:exported="false" />
         <activity
-            android:name=".views.JudgementDayHistoryActivity"
+            android:name=".views.CombinedHistoryActivity"
             android:exported="false" />
         <activity
             android:name=".views.JudgementDayEditActivity"

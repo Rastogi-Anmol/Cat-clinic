@@ -1,7 +1,6 @@
 package com.example.catclinic.views;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -11,15 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.catclinic.R;
 import com.example.catclinic.controllers.CombinedHistoryController;
-import com.example.catclinic.controllers.JudgementDayHistoryController;
-import com.example.catclinic.models.JudgementDayEntry;
-import com.example.catclinic.utils.CombinedHistoryExpandedViewHolder;
 import com.example.catclinic.utils.CombinedHistoryViewAdapter;
-import com.example.catclinic.utils.JudgementDayViewAdapter;
 
 import java.util.List;
 
-public class JudgementDayHistoryActivity extends AppCompatActivity {
+public class CombinedHistoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CombinedHistoryViewAdapter adapter;
     private ImageView backBtn;
@@ -48,7 +43,7 @@ public class JudgementDayHistoryActivity extends AppCompatActivity {
         historyController.startListening(
                 entries -> adapter.updateList(entries),
                 error   -> Toast.makeText(
-                        JudgementDayHistoryActivity.this,
+                        CombinedHistoryActivity.this,
                         "Error loading entries: " + error.getMessage(),
                         Toast.LENGTH_LONG
                 ).show()

@@ -7,8 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.catclinic.R;
-import com.example.catclinic.models.HistoryWrapperModel;
-import com.example.catclinic.models.JudgementDayEntry;
+import com.example.catclinic.models.CombinedHistoryModel;
 
 public class CombinedHistoryViewHolder extends RecyclerView.ViewHolder {
 
@@ -22,7 +21,7 @@ public class CombinedHistoryViewHolder extends RecyclerView.ViewHolder {
         time = itemView.findViewById(R.id.activityTime);
     }
 
-    public void bind(HistoryWrapperModel entry) {
+    public void bind(CombinedHistoryModel entry) {
 
         activity.setText(entry.getCollectionName() + " : "  + entry.getTopic());
 

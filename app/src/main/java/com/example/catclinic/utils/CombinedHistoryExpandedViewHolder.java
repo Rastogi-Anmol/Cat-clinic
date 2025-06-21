@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.catclinic.R;
 import com.example.catclinic.controllers.ComfortZoneController;
 import com.example.catclinic.controllers.JudgementDayController;
-import com.example.catclinic.models.HistoryWrapperModel;
+import com.example.catclinic.models.CombinedHistoryModel;
 import com.example.catclinic.views.ComfortZoneEditActivity;
 import com.example.catclinic.views.JudgementDayEditActivity;
-
-import java.util.Objects;
 
 public class CombinedHistoryExpandedViewHolder extends RecyclerView.ViewHolder{
 
@@ -33,7 +31,7 @@ public class CombinedHistoryExpandedViewHolder extends RecyclerView.ViewHolder{
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
         }
 
-        public void bind(HistoryWrapperModel entry, Context context) {
+        public void bind(CombinedHistoryModel entry, Context context) {
 
 
 
