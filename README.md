@@ -1,6 +1,6 @@
 # Cat-clinic
 
-An Android mobile app that helps users practice Cognitive Behavioral Therapy (CBT) techniques through a playful, cat-themed interface. Users “put their thoughts on trial,” weigh evidence for/against them, and arrive at a verdict—all with end-to-end encrypted storage.
+An Android mobile app that helps users practice Cognitive Behavioral Therapy (CBT) techniques through a playful, cat-themed interface. Users “put their thoughts on trial,” weigh evidence for/against them, and arrive at a verdict—all with end-to-end encrypted storage. Users can decide upon future goals by going through what they are comfortable doing right now, what seems to be an achievable taks that lies just outside their comfort zone which in other words is also called the stretch zone and then the goal tasks.
 
 ---
 
